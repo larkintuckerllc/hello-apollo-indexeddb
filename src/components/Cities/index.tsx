@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { loadCities } from '../../api/cities';
+import { loadCities, searchCities } from '../../api/cities';
 
 export default class Cities extends PureComponent {
   public state = {
@@ -8,6 +8,8 @@ export default class Cities extends PureComponent {
 
   public async componentDidMount() {
     await loadCities();
+    const cities = await searchCities('a');
+    window.console.log(cities);
     this.setState({ loading: false });
   }
 
