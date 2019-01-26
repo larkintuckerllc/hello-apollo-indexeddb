@@ -23,7 +23,7 @@ export default class Cities extends PureComponent {
     }
     return (
       <div>
-        <input onChange={this.handleChange} value={value} />
+        <input onChange={this.handleChange} style={{ fontSize: 20 }} value={value} />
         {starts !== '' && <CitiesResults starts={starts} />}
       </div>
     );
