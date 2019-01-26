@@ -8,7 +8,7 @@ const delay = () =>
     }, 1000);
   });
 
-interface City {
+export interface City {
   id: number;
   city: string;
   state: string;
