@@ -1,10 +1,14 @@
 import React, { PureComponent } from 'react';
 import { loadCities, searchCities } from '../../api/cities';
+import debounced from '../../utils/debounced';
 import CitiesResults from './CitiesResults';
 
+const DEBOUNCED_MS = 500;
 export default class Cities extends PureComponent {
   public state = {
     loading: true,
+    starts: '',
+    value: '',
   };
 
   public async componentDidMount() {
@@ -13,10 +17,28 @@ export default class Cities extends PureComponent {
   }
 
   public render() {
-    const { loading } = this.state;
+    const { loading, starts, value } = this.state;
     if (loading) {
       return <div>Loading...</div>;
     }
-    return <CitiesResults starts="a" />;
+    return (
+      <div>
+        <input onChange={this.handleChange} value={value} />
+        {starts !== '' && <CitiesResults starts={starts} />}
+      </div>
+    );
   }
+
+  private setStarts = (starts: string) => {
+    this.setState({ starts });
+  };
+
+  private handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    this.setState({ value });
+    this.setStartDebounced(value);
+  };
+
+  // tslint:disable-next-line
+  private setStartDebounced = debounced(DEBOUNCED_MS, this.setStarts);
 }

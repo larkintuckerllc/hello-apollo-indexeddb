@@ -18,7 +18,7 @@ const SEARCH_CITIES = gql`
 `;
 
 const CitiesResults = ({ starts }: Props) => (
-  <Query query={SEARCH_CITIES} fetchPolicy="no-cache" variables={{ starts: 'b' }}>
+  <Query query={SEARCH_CITIES} fetchPolicy="no-cache" variables={{ starts }}>
     {({ data: { searchCities }, loading }) => {
       if (loading) {
         return <div>Loading...</div>;
