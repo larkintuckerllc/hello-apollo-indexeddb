@@ -9,7 +9,7 @@ export default class CitiesResultsView extends PureComponent<Props> {
   public render() {
     const { results } = this.props;
     return (
-      <ul>
+      <ul style={{ listStyleType: 'none' }}>
         {results.map(city => (
           <li key={city.id}>
             {city.city}, {city.state}
